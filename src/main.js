@@ -1,11 +1,15 @@
-import { fetchImages } from './js/pixabay-api.js';
-import { clearGallery, createImageCard, showNoResultsMessage, showLoadingIndicator, hideLoadingIndicator } from './js/render-functions.js';
+import { fetchImages } from '/js/pixabay-api.js';
+import { clearGallery, createImageCard, showNoResultsMessage, loader, showLoader, hideLoader } from '/js/render-functions.js';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const form = document.querySelector('#search-form');
 const input = document.querySelector('#search-input');
 const gallery = document.querySelector('.gallery');
+
+// testing area
+const lightbox = new SimpleLightbox('.lightbox');
+// testing area
 
 
 form.addEventListener('submit', (e) => {
@@ -22,11 +26,13 @@ form.addEventListener('submit', (e) => {
 
 
   clearGallery();
-  showLoadingIndicator();
+
+  showLoader(loader);
+
 
   fetchImages(query)
     .then(images => {
-      hideLoadingIndicator();
+      hideLoader(loader);
       if (images.length === 0) {
         showNoResultsMessage();
       } else {
@@ -36,12 +42,12 @@ form.addEventListener('submit', (e) => {
         });
         
   
-        const lightbox = new SimpleLightbox('.lightbox');
+        // const lightbox = new SimpleLightbox('.lightbox');
         lightbox.refresh();
       }
     })
     .catch(error => {
-      hideLoadingIndicator();
+      hideLoader(loader);
       iziToast.error({
         title: 'Error',
         message: 'Something went wrong. Please try again later.',

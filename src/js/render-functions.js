@@ -42,16 +42,12 @@ export const showNoResultsMessage = () => {
 };
 
 
-export const showLoadingIndicator = () => {
-  const loader = document.createElement('div');
-  loader.classList.add('loader');
-  document.body.appendChild(loader);
-};
+export const loader = document.querySelector('.loader');
 
+export function showLoader(loader) {
+    loader.classList.remove('hidden');
+}
 
-export const hideLoadingIndicator = () => {
-  const loader = document.querySelector('.loader');
-  if (loader) {
-    loader.remove();
-  }
-};
+export function hideLoader(loader) {
+    loader.classList.add('hidden');
+}
