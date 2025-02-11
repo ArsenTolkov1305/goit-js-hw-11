@@ -7,6 +7,11 @@ const form = document.querySelector('#search-form');
 const input = document.querySelector('#search-input');
 const gallery = document.querySelector('.gallery');
 
+// fixing loader after page refresh
+    hideLoader(loader);
+// fixing loader
+
+
 // testing area
 const lightbox = new SimpleLightbox('.lightbox');
 // testing area
